@@ -1,0 +1,10 @@
+/.DS_Store
+/.venv
+/CLIENTSCRAP.py
+/Registration.py
+/SERVERSCRAP.py
+/__pycache__
+/chat.db
+/notification.py
+/tone.wav
+/users.db
