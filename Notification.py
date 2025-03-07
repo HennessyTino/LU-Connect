@@ -4,7 +4,7 @@ from playsound import playsound
 
 
 #! Very simple implementation to play the notification sound
-def notification_sound(sound_file="tone.wav"):
+def notification_sound(sound_file="messagesound.wav"):
     try:
         playsound(sound_file)
     except Exception as e:
@@ -13,4 +13,4 @@ def notification_sound(sound_file="tone.wav"):
 
 #! Test the notification sound separately   
 if __name__ == "__main__":
-    notification_sound("tone.wav")
+    notification_sound("messagesound.wav")
