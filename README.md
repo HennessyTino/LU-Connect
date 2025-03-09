@@ -61,7 +61,7 @@
 
 <!-- Prerequisites -->
 ### Prerequisites
-- This prokect uses *brew* as package manager locally
+- This project uses *brew* as package manager locally
 - This project uses *pip3* as package manager inside the virtual enviroment
 
 ```bash
