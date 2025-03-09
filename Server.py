@@ -16,7 +16,7 @@ connection_limit = Semaphore(MAX_CONNECTIONS)
 # This will be used later to put users in the waiting queue
 waiting_queue = []
 
-# Global lock for shared resources (if needed)
+
 clients_lock = Lock()
 
 #! Class that servers as a "Mediator", it stores client connections with their username
@@ -132,7 +132,7 @@ def client_handler(client, address):
         client.close()
         with clients_lock:
             mediator.unregister_client(client)
-        connection_limit.release()  # add client back to available connection slots
+        connection_limit.release()  
 
 
 #! Function to accept incoming client connections
