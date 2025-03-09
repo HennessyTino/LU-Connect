@@ -2,7 +2,7 @@ import sqlite3
 import hashlib
 
 
-DB_NAME = "users.db"
+DB_NAME = "LUConnect.db"
 
 
 #! Initialize databse by creating the user table if it already doesnt exits
@@ -66,6 +66,6 @@ def login_user(username, password):
         return True, "Login successful. \nYou can now chat. \nType 'exit' to disconnect.\n"
     else:
         return False, "Incorrect password."
-    
+
 
 

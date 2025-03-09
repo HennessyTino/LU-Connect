@@ -28,34 +28,36 @@ def pre_auth(sock):
         return data
 
 class LU_ConnectGUI:
+    #! Innit mainly for GUI, it generates the GUI and the options to customize it
     def __init__(self, master, sock, welcome_msg="", theme=None):
         self.master = master
         self.master.title("LU-Connect Chat")
         self.sock = sock
         # Default theme settings if none provided.
         self.theme = theme or {
-            "chat_bg": "#DBD9D9",
+            "chat_bg": "#4F4F4F",
             "chat_font": ("San Francisco", 12),  # changed from Helvetica to San Francisco
-            "entry_bg": "#DBD9D9",
+            "entry_bg": "#4F4F4F",
             "entry_font": ("San Francisco", 12)
         }
         
         # Create GUI elements.
-        self.chat_area = scrolledtext.ScrolledText(master, wrap=tk.WORD, bg=self.theme["chat_bg"], font=self.theme["chat_font"], fg="black")
+        self.chat_area = scrolledtext.ScrolledText(master, wrap=tk.WORD, bg=self.theme["chat_bg"], font=self.theme["chat_font"], fg="white")
         self.chat_area.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
         self.chat_area.config(state=tk.DISABLED)
         
-        self.entry_field = tk.Entry(master, bg=self.theme["entry_bg"], font=self.theme["entry_font"], fg="black", width=50)
-        self.entry_field.pack(padx=10, pady=10, anchor="w")  # changed to align left
+        self.entry_field = tk.Entry(master, bg=self.theme["entry_bg"], font=self.theme["entry_font"], fg="white", width=50)
+        self.entry_field.pack(padx=10, pady=10, anchor="w")  
         self.entry_field.bind("<Return>", self.send_message)
         
-        # Display the welcome message in the chat area.
+        
         if welcome_msg:
             self.update_chat_area(welcome_msg.strip())
         
-        # Proceed with normal authentication.
+       
         self.authenticate()
-        # Start listening for messages.
+
+        #! Thread to start listening for messages to receive
         threading.Thread(target=self.receive_messages, daemon=True).start()
 
 
@@ -93,6 +95,7 @@ class LU_ConnectGUI:
             self.sock.close()
             self.master.after(1000, lambda: (self.master.quit(), sys.exit(0)))
     
+    #! Function that listens to incoming messages and makes sure that the notification sound does not play in the wrong message like "welcome" message
     def receive_messages(self):
         while True:
             try:
