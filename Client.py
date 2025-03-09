@@ -33,15 +33,15 @@ class LU_ConnectGUI:
         self.master = master
         self.master.title("LU-Connect Chat")
         self.sock = sock
-        # Default theme settings if none provided.
+        
         self.theme = theme or {
             "chat_bg": "#4F4F4F",
-            "chat_font": ("San Francisco", 12),  # changed from Helvetica to San Francisco
+            "chat_font": ("San Francisco", 12),  
             "entry_bg": "#4F4F4F",
             "entry_font": ("San Francisco", 12)
         }
         
-        # Create GUI elements.
+        
         self.chat_area = scrolledtext.ScrolledText(master, wrap=tk.WORD, bg=self.theme["chat_bg"], font=self.theme["chat_font"], fg="white")
         self.chat_area.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
         self.chat_area.config(state=tk.DISABLED)
@@ -77,7 +77,7 @@ class LU_ConnectGUI:
         self.sock.sendall(username.encode('utf-8'))
     
         password_prompt = self.sock.recv(1024).decode('utf-8')
-        # In case the server sends an error message later on
+       
         if "Invalid option" in password_prompt:
             self.update_chat_area(password_prompt.strip())
             self.sock.close()
@@ -140,10 +140,10 @@ if __name__ == "__main__":
         print(f"[ERROR]: Connection Error: {e}")
         sys.exit(1)
     
-    # Run pre_auth in terminal and capture welcome message.
+    
     welcome_message = pre_auth(sock)
     
-    # Launch the GUI only after client is out of queue.
+   
     root = tk.Tk()
     client = LU_ConnectGUI(root, sock, welcome_message)
     root.protocol("WM_DELETE_WINDOW", lambda: (sock.sendall("exit".encode('utf-8')), sock.close(), root.quit(), sys.exit(0)))
