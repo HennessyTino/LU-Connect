@@ -5,11 +5,9 @@
 - [About the Project](#about-the-project)
   * [Languages](#languages)
   * [Features](#features)
-  * [Environment Variables](#environment-variables)
+  * [Libraries](#libraries)
 - [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-  * [Running Tests](#running-tests)
   * [Run Locally](#run-locally)
   * [Deployment](#deployment)
 - [Usage](#usage)
@@ -31,8 +29,11 @@
     <li><a href="https://www.python.org/">Python</a></li>
 
 
-<summary>Database: </summary>
+  <summary>Database: </summary>
     <li><a href="https://www.sqlite.org">SQLite</a></li>
+
+  <summary>GUI: </summary>
+    <li><a href="https://docs.python.org/es/3.13/library/tkinter.html">TKinter</a></li>
 
 
 
@@ -50,44 +51,33 @@
 - User information and messages will be stored in the "Lu-connect" database
 - Lu-Connect implements a easy and simple to understand GUI
 
-
-### Environment Variables
-
-To run this project, you will need to add the following environment variables to your .env file
-
-`API_KEY`
-
-`ANOTHER_API_KEY`
-
+### Libraries
+- Hashlib
+- playsound
+- datetime
+- tkinter (GUI) 
 <!-- Getting Started -->
 ## Getting Started
 
 <!-- Prerequisites -->
 ### Prerequisites
-
-This project uses Yarn as package manager
+- This prokect uses *brew* as package manager locally
+- This project uses *pip3* as package manager inside the virtual enviroment
 
 ```bash
- npm install --global yarn
+  python3 -m ensurepip
 ```
 
-<!-- Installation -->
-### Installation
-
-Install my-project with npm
+Install playsound to play notification sound when message is received
 
 ```bash
-  yarn install my-project
-  cd my-project
+  pip install playsound
 ```
-   
-<!-- Running Tests -->
-### Running Tests
 
-To run tests, run the following command
+Install TKinter, this is used for the GUI
 
 ```bash
-  yarn test test
+  brew install python-tk
 ```
 
 <!-- Run Locally -->
