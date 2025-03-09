@@ -25,7 +25,7 @@ def hash_password(password):
     return password_hash
 
 
-
+#! Function that takes the 'username' and 'password' from server, and creates the account storing them in the Database
 def register_user(username, password):
     init_db()
     conn = sqlite3.connect(DB_NAME)
@@ -44,7 +44,8 @@ def register_user(username, password):
 
 
 
-
+#! Login Function, that checks if the username is already taken, by navigating the Database.
+#! If the username exists then log in message will be displayed.
 def login_user(username, password):
     init_db()
     conn = sqlite3.connect(DB_NAME)
