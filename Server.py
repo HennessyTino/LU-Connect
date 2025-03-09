@@ -170,7 +170,7 @@ if __name__ == "__main__":
     #* Create the server socket
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    server.bind((HOST, PORT))  # bind the server to specific host and port
+    server.bind((HOST, PORT))  
     server.listen(5)
     print(f"[STARTED]: Server listening on {HOST}:{PORT}")
 
