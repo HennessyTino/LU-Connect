@@ -20,7 +20,7 @@ waiting_queue = []
 clients_lock = Lock()
 
 #! Class that servers as a "Mediator", it stores client connections with their username
-class ChatMediator:
+class LU_ConnectMediator:
     def __init__(self):
         self.clients = {}  
         self.lock = Lock()  
@@ -51,7 +51,7 @@ class ChatMediator:
                         print(f"[ERROR]: Error sending message: {e}")
 
 
-mediator = ChatMediator()
+mediator = LU_ConnectMediator()
 
 
 #! initialize the messages database and create the table if it doesn't exist
