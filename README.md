@@ -9,7 +9,6 @@
 - [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Run Locally](#run-locally)
-  * [Deployment](#deployment)
 - [Usage](#usage)
 - [Acknowledgements](#acknowledgements)
   
@@ -86,59 +85,52 @@ Install TKinter, this is used for the GUI
 Clone the project
 
 ```bash
-  git clone https://github.com/Louis3797/awesome-readme-template.git
+   git clone https://github.com/HennessyTino/LU-Connect.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd LU-Connect
 ```
 
-Install dependencies
+Run the Server
 
 ```bash
-  yarn install
+  python3 Server.py
 ```
 
-Start the server
+In a separate terminal run the Client
 
 ```bash
-  yarn start
+  python3 Client.py
 ```
 
-
-<!-- Deployment -->
-### Deployment
-
-To deploy this project run
-
-```bash
-  yarn deploy
-```
+The GUI should pop up, and the software is ready for use.
 
 
 <!-- Usage -->
 ## Usage
 
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
+When the GUi pops up, the user will be prompted with the register or login option.  
+If register is selected, the user will be asked to input a username and later on a password.  
+Once the user information is inputed, the server will store the information in the LU-connect database.  
+After registering the user is able to connect to the chat and start messaging right away.  
+To exit the chat, the user must simply input ***"exit"*** and the connection will be terminated.  
+If a old user returns, the option to ***"login"*** must be selected, and the user must input his information.  
+
+Three users are able to connect simultaneously, if a 4th user wishes to connect, they will be placed  
+in a waiting queue. To wait for the next slot to be availabe. Once the theres one, the user will  
+be put the login/register process normally.
 
 
-```javascript
-import Component from 'my-project'
-
-function App() {
-  return <Component />
-}
-```
 
 <!-- Contact -->
-## Contact
+## Personal Information
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Juan Valentin Toscano - **StudentID**: 39228436 - v.toscano@lancaster.ac.uk
 
-Project Link: [https://github.com/Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
-
+Project Link: [https://github.com/HennessyTino/LU-Connect.git)
 
 <!-- Acknowledgments -->
 ## Acknowledgements
