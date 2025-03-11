@@ -10,7 +10,7 @@
   * [Prerequisites](#prerequisites)
   * [Run Locally](#run-locally)
 - [Usage](#usage)
-- [Acknowledgements](#acknowledgements)
+- [References](#references)
   
 
 <!-- About the Project -->
@@ -133,11 +133,14 @@ Juan Valentin Toscano - **StudentID**: 39228436 - v.toscano@lancaster.ac.uk
 Project Link: [https://github.com/HennessyTino/LU-Connect.git)
 
 <!-- Acknowledgments -->
-## Acknowledgements
+## References
+- [README template] [https://github.com/Louis3797/awesome-readme-template.git)
+- The encrypyion for this code was based on my Cyber Security Lectures
+- The Server implementation was made using my Computer Network and Systems coursework as reference.
 
-Use this section to mention useful resources and libraries that you have used in your projects.
 
- - [Shields.io](https://shields.io/)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
- - [Readme Template](https://github.com/othneildrew/Best-README-Template)
+
+
+
+
+
