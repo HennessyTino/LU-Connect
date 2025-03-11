@@ -29,10 +29,11 @@ def pre_auth(sock):
 
 class LU_ConnectGUI:
     #! Innit mainly for GUI, it generates the GUI and the options to customize it
-    def __init__(self, master, sock, welcome_msg="", theme=None):
+    def __init__(self, master, sock, welcome_msg="", theme = None):
         self.master = master
         self.master.title("LU-Connect Chat")
         self.sock = sock
+        self.notifications_enabled = True
         
         self.theme = theme or {
             "chat_bg": "#4F4F4F",
@@ -42,12 +43,12 @@ class LU_ConnectGUI:
         }
         
         
-        self.chat_area = scrolledtext.ScrolledText(master, wrap=tk.WORD, bg=self.theme["chat_bg"], font=self.theme["chat_font"], fg="white")
-        self.chat_area.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
-        self.chat_area.config(state=tk.DISABLED)
+        self.chat_area = scrolledtext.ScrolledText(master, wrap = tk.WORD, bg = self.theme["chat_bg"], font = self.theme["chat_font"], fg="white")
+        self.chat_area.pack(padx = 10, pady = 10, fill=tk.BOTH, expand = True)
+        self.chat_area.config(state = tk.DISABLED)
         
-        self.entry_field = tk.Entry(master, bg=self.theme["entry_bg"], font=self.theme["entry_font"], fg="white", width=50)
-        self.entry_field.pack(padx=10, pady=10, anchor="w")  
+        self.entry_field = tk.Entry(master, bg = self.theme["entry_bg"], font = self.theme["entry_font"], fg = "white", width = 50)
+        self.entry_field.pack(padx = 10, pady = 10, anchor = "w")  
         self.entry_field.bind("<Return>", self.send_message)
         
         
@@ -58,9 +59,10 @@ class LU_ConnectGUI:
         self.authenticate()
 
         #! Thread to start listening for messages to receive
-        threading.Thread(target=self.receive_messages, daemon=True).start()
+        threading.Thread(target=self.receive_messages, daemon = True).start()
 
 
+    #! Function to do authentication, sends the info to the server,
     def authenticate(self):
         choice = simpledialog.askstring("Authentication", "Type 'register' or 'login':")
         self.sock.sendall(choice.encode('utf-8'))
@@ -77,7 +79,6 @@ class LU_ConnectGUI:
         self.sock.sendall(username.encode('utf-8'))
     
         password_prompt = self.sock.recv(1024).decode('utf-8')
-       
         if "Invalid option" in password_prompt:
             self.update_chat_area(password_prompt.strip())
             self.sock.close()
@@ -85,7 +86,7 @@ class LU_ConnectGUI:
             return
         self.update_chat_area(password_prompt.strip())
     
-        password = simpledialog.askstring("Authentication", "Enter password:", show="*")
+        password = simpledialog.askstring("Authentication", "Enter password:", show = "*")
         self.sock.sendall(password.encode('utf-8'))
     
         response = self.sock.recv(1024).decode('utf-8')
@@ -107,13 +108,24 @@ class LU_ConnectGUI:
                 
                 # Defined prefixes to avoid playing notification sound unnecessarily.
                 system_prefixes = ("Welcome", "Server busy", "Slot available", "Authentication", "Connected", "User", "has connected to the chat.", "has disconnected from the chat.")
-                if not any(prefix in decoded_message for prefix in system_prefixes):
+                if self.notifications_enabled and not any(prefix in decoded_message for prefix in system_prefixes):
                     Notification.notification_sound("messagesound.wav")
             except Exception:
                 break
 
-    def send_message(self, event=None):
+    def send_message(self, event = None):
         message = self.entry_field.get()
+        if message.lower() == "/mute":
+            self.notifications_enabled = False
+            self.update_chat_area("Notifications muted.")
+            self.entry_field.delete(0, tk.END)
+            return
+        elif message.lower() == "/unmute":
+            self.notifications_enabled = True
+            self.update_chat_area("Notifications unmuted.")
+            self.entry_field.delete(0, tk.END)
+            return
+        
         if message.strip() == "exit":
             self.sock.sendall(message.encode('utf-8'))
             self.sock.close()
@@ -122,7 +134,6 @@ class LU_ConnectGUI:
             sys.exit(0)
         else:
             self.sock.sendall(message.encode('utf-8'))
-            # Update chat area with "You:" prefix.
             self.update_chat_area("You: " + message)
             self.entry_field.delete(0, tk.END)
 
@@ -142,8 +153,6 @@ if __name__ == "__main__":
     
     
     welcome_message = pre_auth(sock)
-    
-   
     root = tk.Tk()
     client = LU_ConnectGUI(root, sock, welcome_message)
     root.protocol("WM_DELETE_WINDOW", lambda: (sock.sendall("exit".encode('utf-8')), sock.close(), root.quit(), sys.exit(0)))

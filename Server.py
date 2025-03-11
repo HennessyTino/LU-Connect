@@ -1,3 +1,9 @@
+"""The server implementation for this project, was based on my Computer Network and Systems Coursework.
+I used that coursework as a base guide to implement a socket server that can handle multiple clients at once."""
+
+
+
+
 import socket
 import threading
 import time
@@ -24,6 +30,7 @@ class LU_ConnectMediator:
     def __init__(self):
         self.clients = {}  
         self.lock = Lock()  
+        
 
     def register_client(self, client, username):
         with self.lock:
@@ -35,7 +42,7 @@ class LU_ConnectMediator:
                 del self.clients[client]
 
     #! Broadcast function is part of "mediator" class it responsible for sending message to every client connected except the sender
-    def broadcast(self, message, sender, notification=False):
+    def broadcast(self, message, sender, notification = False):
         ts = datetime.datetime.now().strftime("%H:%M")
         with self.lock:
             if notification:
@@ -112,7 +119,7 @@ def client_handler(client, address):
             mediator.register_client(client, username)
 
         client.sendall(msg.encode())
-        mediator.broadcast(f"{username} has connected to the chat.", client, notification=True)
+        mediator.broadcast(f"{username} has connected to the chat.", client, notification = True)
 
         # Main communication loop: receive messages and broadcast them.
         while True:
@@ -121,7 +128,7 @@ def client_handler(client, address):
                 break
             text = data.decode()
             if text == "exit":
-                mediator.broadcast(f"{username} has disconnected from the chat.", client, notification=True)
+                mediator.broadcast(f"{username} has disconnected from the chat.", client, notification = True)
                 break
 
             mediator.broadcast(text, client)
@@ -141,8 +148,8 @@ def accept_connections(server):
         client, addr = server.accept()
         print(f"[INFO] Incoming connection from {addr}")
 
-        if connection_limit.acquire(blocking=False):
-            accept_conn_thread = threading.Thread(target=client_handler, args=(client, addr))
+        if connection_limit.acquire(blocking = False):
+            accept_conn_thread = threading.Thread(target=client_handler, args = (client, addr))
             accept_conn_thread.daemon = True
             accept_conn_thread.start()
         else:
@@ -156,7 +163,7 @@ def waiting_queue_handler():
             connection_limit.acquire()
             client, addr = waiting_queue.pop(0)
             client.sendall(b"Slot available. Connecting now...\n")
-            waiting_queue_thread = threading.Thread(target=client_handler, args=(client, addr))
+            waiting_queue_thread = threading.Thread(target = client_handler, args = (client, addr))
             waiting_queue_thread.daemon = True
             waiting_queue_thread.start()
         time.sleep(1)
