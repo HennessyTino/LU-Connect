@@ -14,7 +14,7 @@ from UserRegistration import register_user, login_user
 
 HOST = '127.0.0.1'
 PORT = 5001
-MAX_CONNECTIONS = 3
+MAX_CONNECTIONS = 1
 
 #! using semaphore to limit the number of active connections
 connection_limit = Semaphore(MAX_CONNECTIONS)
@@ -161,9 +161,15 @@ def waiting_queue_handler():
     while True:
         if waiting_queue:
             connection_limit.acquire()
-            client, addr = waiting_queue.pop(0)
-            client.sendall(b"Slot available. Connecting now...\n")
-            waiting_queue_thread = threading.Thread(target = client_handler, args = (client, addr))
+            with clients_lock:
+                client, addr = waiting_queue.pop(0)
+            try:
+                client.sendall(b"Slot available. Connecting now...\n")
+            except Exception:
+                # If sending fails, release the slot and continue
+                connection_limit.release()
+                continue
+            waiting_queue_thread = threading.Thread(target=client_handler, args=(client, addr))
             waiting_queue_thread.daemon = True
             waiting_queue_thread.start()
         time.sleep(1)
@@ -198,3 +204,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("\n[SHUTDOWN] Server is shutting down.")
         server.close()
+
