@@ -115,12 +115,12 @@ class LU_ConnectGUI:
 
     def send_message(self, event = None):
         message = self.entry_field.get()
-        if message.lower() == "/mute":
+        if message.lower() == "!mute":
             self.notifications_enabled = False
             self.update_chat_area("Notifications muted.")
             self.entry_field.delete(0, tk.END)
             return
-        elif message.lower() == "/unmute":
+        elif message.lower() == "!unmute":
             self.notifications_enabled = True
             self.update_chat_area("Notifications unmuted.")
             self.entry_field.delete(0, tk.END)

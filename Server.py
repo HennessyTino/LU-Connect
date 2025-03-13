@@ -14,7 +14,7 @@ from UserRegistration import register_user, login_user
 
 HOST = '127.0.0.1'
 PORT = 5001
-MAX_CONNECTIONS = 1
+MAX_CONNECTIONS = 3
 
 #! using semaphore to limit the number of active connections
 connection_limit = Semaphore(MAX_CONNECTIONS)
