@@ -157,4 +157,3 @@ if __name__ == "__main__":
     client = LU_ConnectGUI(root, sock, welcome_message)
     root.protocol("WM_DELETE_WINDOW", lambda: (sock.sendall("exit".encode('utf-8')), sock.close(), root.quit(), sys.exit(0)))
     root.mainloop()
-

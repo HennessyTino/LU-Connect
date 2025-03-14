@@ -3,7 +3,6 @@ I used that coursework as a base guide to implement a socket server that can han
 
 
 
-
 import socket
 import threading
 import time
