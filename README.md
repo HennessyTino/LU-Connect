@@ -6,6 +6,7 @@
   * [Languages](#languages)
   * [Features](#features)
   * [Libraries](#libraries)
+  * [Design Pattern](#design-pattern)
 - [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Run Locally](#run-locally)
@@ -54,7 +55,20 @@
 - Hashlib
 - playsound
 - datetime
-- tkinter (GUI) 
+- tkinter (GUI)
+
+
+### Design Pattern
+
+
+
+
+
+
+
+
+
+
 <!-- Getting Started -->
 ## Getting Started
 
