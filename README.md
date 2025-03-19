@@ -60,13 +60,18 @@
 
 ### Design Pattern
 
+The design patter that I applied in this software was the "Mediator"  
+this approach works well in this "chat" system since it is used as  
+a single point of control for all the communication between clients.  
+  
+It manages all client connections in one place using "thread" safe locks.  
+It also helps keep track of said clients and the distribuition of the messages.  
+Instead of the clients communicating all of the messages go trough the mediator  
+and the mediator broadcasts these messages to the other clients. It simiplifies  
+the communication system.
 
-
-
-
-
-
-
+The pattern is effective for this project since it imitates the real-word  
+concept of a chat room with a moderator managing the communications with the clients.
 
 
 <!-- Getting Started -->
