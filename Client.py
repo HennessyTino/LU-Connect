@@ -113,6 +113,8 @@ class LU_ConnectGUI:
             except Exception:
                 break
 
+
+    #! Function to send messages to the server, also has the functions like "exit" "!mute" and "!unmute"
     def send_message(self, event = None):
         message = self.entry_field.get()
         if message.lower() == "!mute":
@@ -143,6 +145,7 @@ class LU_ConnectGUI:
         self.chat_area.config(state=tk.DISABLED)
         self.chat_area.yview(tk.END)
 
+#! The Main of the function to start the client and all it processes 
 if __name__ == "__main__":
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:

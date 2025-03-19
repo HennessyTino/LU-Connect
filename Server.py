@@ -2,7 +2,6 @@
 I used that coursework as a base guide to implement a socket server that can handle multiple clients at once."""
 
 
-
 import socket
 import threading
 import time

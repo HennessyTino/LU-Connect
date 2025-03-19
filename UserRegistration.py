@@ -2,6 +2,7 @@ import sqlite3
 import hashlib
 
 
+
 DB_NAME = "LUConnect.db"
 
 
